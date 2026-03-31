@@ -1,0 +1,41 @@
+[package]
+name = "rust-examples-patriots"
+version = "0.1.0"
+edition = "2021"
+description = "rust programming concepts through the 2004 new england patriots"
+authors = ["Bryan Chasko"]
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+csv = "1"
+regex = "1"
+rayon = "1"
+anyhow = "1"
+
+[[example]]
+name = "functions"
+path = "src/functions/brady_calculator.rs"
+
+[[example]]
+name = "structs_traits"
+path = "src/structs_traits/player.rs"
+
+[[example]]
+name = "error_handling"
+path = "src/error_handling/game_result.rs"
+
+[[example]]
+name = "iterators"
+path = "src/loops_iterators/roster_iter.rs"
+
+[[example]]
+name = "enums"
+path = "src/enums/play_type.rs"
+
+[[example]]
+name = "file_io"
+path = "src/file_io/read_roster.rs"
+
+[dev-dependencies]
+assert_matches = "1"
