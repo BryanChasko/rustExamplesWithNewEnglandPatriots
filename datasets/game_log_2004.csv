@@ -1,0 +1,23 @@
+# source: pro-football-reference.com -- 2004 new england patriots regular season
+# record: 14-2 | home: 8-0 | away: 6-2
+week,opponent,location,pts_patriots,pts_opponent,result
+1,Indianapolis Colts,home,27,24,W
+2,Arizona Cardinals,away,23,12,W
+3,Buffalo Bills,home,31,17,W
+4,Miami Dolphins,away,24,10,W
+5,Pittsburgh Steelers,away,20,34,L
+6,Seattle Seahawks,home,30,20,W
+7,New York Jets,home,13,7,W
+8,Bye Week,,,
+9,St. Louis Rams,home,40,22,W
+10,Kansas City Chiefs,away,27,19,W
+11,Buffalo Bills,away,29,6,W
+12,Baltimore Ravens,home,24,3,W
+13,Cleveland Browns,away,42,15,W
+14,Cincinnati Bengals,home,35,28,W
+15,Miami Dolphins,home,28,29,L
+16,New York Jets,away,23,7,W
+17,San Francisco 49ers,home,21,7,W
+18,Indianapolis Colts (Playoffs Div),home,20,3,W
+19,Pittsburgh Steelers (Playoffs AFC),away,41,27,W
+20,Philadelphia Eagles (Super Bowl XXXIX),neutral,24,21,W
