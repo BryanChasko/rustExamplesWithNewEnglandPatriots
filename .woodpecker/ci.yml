@@ -1,22 +1,44 @@
-steps:
-  test:
-    image: rust:1-slim
-    failure: ignore
-    commands:
-      - cargo test
-      - cargo clippy -- -D warnings
-      - cargo fmt --check
+---
+# canonical rust pipeline — heraldstack woodpecker template
+# no failure: ignore. test step uses --lib --bins to skip [[example]]
+# entries pointing at non-existent paths (file_io/read_roster.rs).
+# fixes before adding examples: create src/file_io/read_roster.rs and
+# remove the --lib --bins restriction, then use --all-targets.
 
-  readme-lint:
-    image: rust:1-slim
-    when:
-      event: pull_request
+when:
+  - event: [pull_request, push, manual]
+    branch: main
+    path:
+      include:
+        - Cargo.toml
+        - Cargo.lock
+        - src/**
+        - tests/**
+        - .woodpecker/**
+
+steps:
+  - name: fmt
+    image: rust:1.87-slim
     commands:
-      - git clone https://github.com/BryanChasko/heraldstack-mcp.git /tmp/heraldstack-mcp
-      - cargo build --release --manifest-path /tmp/heraldstack-mcp/tools/readme-lint/Cargo.toml
-      - |
-        git fetch origin main:main
-        changed=$(git diff --name-only main HEAD | grep '\.md$' || true)
-        if [ -n "$changed" ]; then
-          /tmp/heraldstack-mcp/tools/readme-lint/target/release/readme-lint $changed
-        fi
+      - rustup component add rustfmt
+      - cargo fmt --all -- --check
+
+  - name: clippy
+    image: rust:1.87-slim
+    commands:
+      - apt-get update -qq && apt-get install -y -qq --no-install-recommends ca-certificates pkg-config libssl-dev git >/dev/null
+      - rustup component add clippy
+      - cargo clippy --lib --bins --all-features -- -D warnings
+
+  - name: build
+    image: rust:1.87-slim
+    commands:
+      - apt-get update -qq && apt-get install -y -qq --no-install-recommends ca-certificates pkg-config libssl-dev git >/dev/null
+      - cargo build --lib --bins --all-features --locked
+
+  - name: test
+    image: rust:1.87-slim
+    depends_on: [build]
+    commands:
+      - apt-get update -qq && apt-get install -y -qq --no-install-recommends ca-certificates pkg-config libssl-dev git >/dev/null
+      - cargo test --lib --bins --all-features --locked --no-fail-fast
