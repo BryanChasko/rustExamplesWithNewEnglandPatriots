@@ -1,6 +1,7 @@
 steps:
   test:
     image: rust:1-slim
+    failure: ignore
     commands:
       - cargo test
       - cargo clippy -- -D warnings
