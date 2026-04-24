@@ -34,9 +34,10 @@ struct GameLog {
 
 fn get_result(game: &GameLog) -> Result<String, PatriotsError> {
     match game.score {
-        None => Err(PatriotsError::InvalidStatline(
-            format!("week {} vs {} has no score", game.week, game.opponent)
-        )),
+        None => Err(PatriotsError::InvalidStatline(format!(
+            "week {} vs {} has no score",
+            game.week, game.opponent
+        ))),
         Some((us, them)) if us > them => Ok(format!("W {us}-{them}")),
         Some((us, them)) if them > us => Ok(format!("L {us}-{them}")),
         Some((us, them)) => Ok(format!("T {us}-{them}")),
@@ -53,10 +54,26 @@ fn find_player(roster: &[&str], name: &str) -> Result<String, PatriotsError> {
 
 fn main() {
     let games = vec![
-        GameLog { week: 1, opponent: "Colts", score: Some((27, 24)) },
-        GameLog { week: 2, opponent: "Cardinals", score: Some((23, 12)) },
-        GameLog { week: 3, opponent: "Bills", score: None }, // corrupted data
-        GameLog { week: 4, opponent: "Dolphins", score: Some((24, 10)) },
+        GameLog {
+            week: 1,
+            opponent: "Colts",
+            score: Some((27, 24)),
+        },
+        GameLog {
+            week: 2,
+            opponent: "Cardinals",
+            score: Some((23, 12)),
+        },
+        GameLog {
+            week: 3,
+            opponent: "Bills",
+            score: None,
+        }, // corrupted data
+        GameLog {
+            week: 4,
+            opponent: "Dolphins",
+            score: Some((24, 10)),
+        },
     ];
 
     println!("2004 patriots game results -- error handling demo\n");
@@ -69,7 +86,12 @@ fn main() {
     }
 
     println!("\nroster lookup demo:");
-    let roster = ["Tom Brady", "Corey Dillon", "Tedy Bruschi", "Adam Vinatieri"];
+    let roster = [
+        "Tom Brady",
+        "Corey Dillon",
+        "Tedy Bruschi",
+        "Adam Vinatieri",
+    ];
 
     for name in ["Tom Brady", "Randy Moss", "Tedy Bruschi"] {
         match find_player(&roster, name) {

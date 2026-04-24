@@ -8,13 +8,13 @@
 fn main() {
     // 2004 patriots receiving leaders -- (name, receptions, yards, tds)
     let receivers: Vec<(&str, u32, u32, u32)> = vec![
-        ("David Givens",   56, 874, 3),
-        ("Deion Branch",   35, 454, 4),
-        ("David Patten",   44, 800, 4),
-        ("Daniel Graham",  30, 364, 7),
-        ("Corey Dillon",   15, 103, 0),
-        ("Kevin Faulk",    26, 248, 0),
-        ("Troy Brown",     17, 184, 4),
+        ("David Givens", 56, 874, 3),
+        ("Deion Branch", 35, 454, 4),
+        ("David Patten", 44, 800, 4),
+        ("Daniel Graham", 30, 364, 7),
+        ("Corey Dillon", 15, 103, 0),
+        ("Kevin Faulk", 26, 248, 0),
+        ("Troy Brown", 17, 184, 4),
     ];
 
     println!("2004 patriots -- receiving leaders\n");
@@ -26,10 +26,7 @@ fn main() {
 
     // iterator chain: filter td scorers, sort by yds, show names
     println!("\ntouchdown scorers sorted by yards:");
-    let mut td_scorers: Vec<_> = receivers
-        .iter()
-        .filter(|(_, _, _, tds)| *tds > 0)
-        .collect();
+    let mut td_scorers: Vec<_> = receivers.iter().filter(|(_, _, _, tds)| *tds > 0).collect();
     td_scorers.sort_by(|a, b| b.2.cmp(&a.2));
     for (name, rec, yds, tds) in &td_scorers {
         println!("  {name}: {yds} yds, {tds} td ({rec} rec)");

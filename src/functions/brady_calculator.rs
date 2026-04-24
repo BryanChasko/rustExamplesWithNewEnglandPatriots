@@ -27,7 +27,14 @@ fn main() {
     println!("2004 new england patriots -- quarterback analysis\n");
 
     // brady 2004 regular season
-    print_qb_season("tom brady (2004 regular season)", 288.0, 474.0, 3692.0, 28.0, 14.0);
+    print_qb_season(
+        "tom brady (2004 regular season)",
+        288.0,
+        474.0,
+        3692.0,
+        28.0,
+        14.0,
+    );
 
     // brady super bowl xxxix
     print_qb_season("tom brady (super bowl xxxix)", 23.0, 33.0, 236.0, 2.0, 0.0);

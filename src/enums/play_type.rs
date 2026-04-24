@@ -8,12 +8,31 @@
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum PlayType {
-    Run { carrier: String, yards: i8 },
-    Pass { target: String, yards: i8, complete: bool },
-    Punt { hangtime: f32, net_yards: u8 },
-    FieldGoal { distance: u8, good: bool },
-    Kickoff { touchback: bool },
-    Penalty { against: String, yards: u8, loss_of_down: bool },
+    Run {
+        carrier: String,
+        yards: i8,
+    },
+    Pass {
+        target: String,
+        yards: i8,
+        complete: bool,
+    },
+    Punt {
+        hangtime: f32,
+        net_yards: u8,
+    },
+    FieldGoal {
+        distance: u8,
+        good: bool,
+    },
+    Kickoff {
+        touchback: bool,
+    },
+    Penalty {
+        against: String,
+        yards: u8,
+        loss_of_down: bool,
+    },
 }
 
 impl PlayType {
@@ -24,49 +43,91 @@ impl PlayType {
     pub fn net_yards(&self) -> i32 {
         match self {
             PlayType::Run { yards, .. } => *yards as i32,
-            PlayType::Pass { complete: true, yards, .. } => *yards as i32,
-            PlayType::Pass { complete: false, .. } => 0,
+            PlayType::Pass {
+                complete: true,
+                yards,
+                ..
+            } => *yards as i32,
+            PlayType::Pass {
+                complete: false, ..
+            } => 0,
             PlayType::Punt { net_yards, .. } => -(*net_yards as i32),
             PlayType::FieldGoal { good: true, .. } => 0, // handled separately
             PlayType::FieldGoal { good: false, .. } => 0,
             PlayType::Kickoff { .. } => 0,
-            PlayType::Penalty { yards, loss_of_down: false, .. } => -(*yards as i32),
-            PlayType::Penalty { yards, loss_of_down: true, .. } => -(*yards as i32),
+            PlayType::Penalty {
+                yards,
+                loss_of_down: false,
+                ..
+            } => -(*yards as i32),
+            PlayType::Penalty {
+                yards,
+                loss_of_down: true,
+                ..
+            } => -(*yards as i32),
         }
     }
 
     pub fn describe(&self) -> String {
         match self {
-            PlayType::Run { carrier, yards } =>
-                format!("{carrier} runs for {yards} yards"),
-            PlayType::Pass { target, yards, complete: true } =>
-                format!("complete to {target} for {yards} yards"),
-            PlayType::Pass { target, complete: false, .. } =>
-                format!("incomplete, intended for {target}"),
-            PlayType::Punt { net_yards, .. } =>
-                format!("punt, {net_yards} yards net"),
-            PlayType::FieldGoal { distance, good: true } =>
-                format!("field goal GOOD from {distance} yards"),
-            PlayType::FieldGoal { distance, good: false } =>
-                format!("field goal NO GOOD from {distance} yards"),
-            PlayType::Kickoff { touchback: true } =>
-                "kickoff touchback".into(),
-            PlayType::Kickoff { .. } =>
-                "kickoff".into(),
-            PlayType::Penalty { against, yards, .. } =>
-                format!("penalty against {against} -- {yards} yards"),
+            PlayType::Run { carrier, yards } => format!("{carrier} runs for {yards} yards"),
+            PlayType::Pass {
+                target,
+                yards,
+                complete: true,
+            } => format!("complete to {target} for {yards} yards"),
+            PlayType::Pass {
+                target,
+                complete: false,
+                ..
+            } => format!("incomplete, intended for {target}"),
+            PlayType::Punt { net_yards, .. } => format!("punt, {net_yards} yards net"),
+            PlayType::FieldGoal {
+                distance,
+                good: true,
+            } => format!("field goal GOOD from {distance} yards"),
+            PlayType::FieldGoal {
+                distance,
+                good: false,
+            } => format!("field goal NO GOOD from {distance} yards"),
+            PlayType::Kickoff { touchback: true } => "kickoff touchback".into(),
+            PlayType::Kickoff { .. } => "kickoff".into(),
+            PlayType::Penalty { against, yards, .. } => {
+                format!("penalty against {against} -- {yards} yards")
+            }
         }
     }
 }
 
 fn main() {
     let drive: Vec<PlayType> = vec![
-        PlayType::Pass { target: "David Givens".into(), yards: 12, complete: true },
-        PlayType::Run { carrier: "Corey Dillon".into(), yards: 7 },
-        PlayType::Pass { target: "Deion Branch".into(), yards: 0, complete: false },
-        PlayType::Pass { target: "Daniel Graham".into(), yards: 18, complete: true },
-        PlayType::Run { carrier: "Kevin Faulk".into(), yards: 3 },
-        PlayType::FieldGoal { distance: 38, good: true },
+        PlayType::Pass {
+            target: "David Givens".into(),
+            yards: 12,
+            complete: true,
+        },
+        PlayType::Run {
+            carrier: "Corey Dillon".into(),
+            yards: 7,
+        },
+        PlayType::Pass {
+            target: "Deion Branch".into(),
+            yards: 0,
+            complete: false,
+        },
+        PlayType::Pass {
+            target: "Daniel Graham".into(),
+            yards: 18,
+            complete: true,
+        },
+        PlayType::Run {
+            carrier: "Kevin Faulk".into(),
+            yards: 3,
+        },
+        PlayType::FieldGoal {
+            distance: 38,
+            good: true,
+        },
     ];
 
     println!("2004 patriots -- drive analysis (pattern matching demo)\n");

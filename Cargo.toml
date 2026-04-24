@@ -33,9 +33,5 @@ path = "src/loops_iterators/roster_iter.rs"
 name = "enums"
 path = "src/enums/play_type.rs"
 
-[[example]]
-name = "file_io"
-path = "src/file_io/read_roster.rs"
-
 [dev-dependencies]
 assert_matches = "1"

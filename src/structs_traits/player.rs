@@ -56,7 +56,11 @@ impl fmt::Display for Player {
             self.name,
             self.position,
             self.years_with_patriots,
-            if self.years_with_patriots == 1 { "" } else { "s" }
+            if self.years_with_patriots == 1 {
+                ""
+            } else {
+                "s"
+            }
         )
     }
 }
@@ -69,11 +73,15 @@ pub trait Stats {
 impl Stats for Player {
     fn position_group(&self) -> &'static str {
         match self.position {
-            Position::Quarterback | Position::WideReceiver
-            | Position::RunningBack | Position::TightEnd => "offense",
+            Position::Quarterback
+            | Position::WideReceiver
+            | Position::RunningBack
+            | Position::TightEnd => "offense",
             Position::OffensiveLine => "o-line",
-            Position::DefensiveLine | Position::Linebacker
-            | Position::Cornerback | Position::Safety => "defense",
+            Position::DefensiveLine
+            | Position::Linebacker
+            | Position::Cornerback
+            | Position::Safety => "defense",
             Position::Kicker => "special teams",
         }
     }
@@ -81,25 +89,62 @@ impl Stats for Player {
     fn is_skill_position(&self) -> bool {
         matches!(
             self.position,
-            Position::Quarterback | Position::WideReceiver | Position::RunningBack | Position::TightEnd
+            Position::Quarterback
+                | Position::WideReceiver
+                | Position::RunningBack
+                | Position::TightEnd
         )
     }
 }
 
 fn main() {
     let roster: Vec<Player> = vec![
-        Player { name: "Tom Brady".into(), number: 12, position: Position::Quarterback, years_with_patriots: 5 },
-        Player { name: "Corey Dillon".into(), number: 28, position: Position::RunningBack, years_with_patriots: 1 },
-        Player { name: "David Givens".into(), number: 87, position: Position::WideReceiver, years_with_patriots: 3 },
-        Player { name: "Tedy Bruschi".into(), number: 54, position: Position::Linebacker, years_with_patriots: 9 },
-        Player { name: "Ty Law".into(), number: 24, position: Position::Cornerback, years_with_patriots: 10 },
-        Player { name: "Adam Vinatieri".into(), number: 4, position: Position::Kicker, years_with_patriots: 9 },
+        Player {
+            name: "Tom Brady".into(),
+            number: 12,
+            position: Position::Quarterback,
+            years_with_patriots: 5,
+        },
+        Player {
+            name: "Corey Dillon".into(),
+            number: 28,
+            position: Position::RunningBack,
+            years_with_patriots: 1,
+        },
+        Player {
+            name: "David Givens".into(),
+            number: 87,
+            position: Position::WideReceiver,
+            years_with_patriots: 3,
+        },
+        Player {
+            name: "Tedy Bruschi".into(),
+            number: 54,
+            position: Position::Linebacker,
+            years_with_patriots: 9,
+        },
+        Player {
+            name: "Ty Law".into(),
+            number: 24,
+            position: Position::Cornerback,
+            years_with_patriots: 10,
+        },
+        Player {
+            name: "Adam Vinatieri".into(),
+            number: 4,
+            position: Position::Kicker,
+            years_with_patriots: 9,
+        },
     ];
 
     println!("2004 new england patriots -- selected roster\n");
     for player in &roster {
         println!("{player}");
-        println!("  group: {} | skill position: {}", player.position_group(), player.is_skill_position());
+        println!(
+            "  group: {} | skill position: {}",
+            player.position_group(),
+            player.is_skill_position()
+        );
     }
 
     let skill: Vec<_> = roster.iter().filter(|p| p.is_skill_position()).collect();
