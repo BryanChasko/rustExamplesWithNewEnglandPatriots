@@ -45,5 +45,21 @@ path = "examples/file_io.rs"
 name = "closures"
 path = "examples/closures.rs"
 
+[[example]]
+name = "lifetimes"
+path = "examples/lifetimes.rs"
+
+[[example]]
+name = "generics"
+path = "examples/generics.rs"
+
+[[example]]
+name = "regex"
+path = "examples/regex.rs"
+
+[[example]]
+name = "concurrency"
+path = "examples/concurrency.rs"
+
 [dev-dependencies]
 assert_matches = "1"

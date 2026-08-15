@@ -5,7 +5,11 @@
 // (pythonExamplesWithNewEnglandPatriots) or extends into rust-only territory
 
 pub mod closures;
+pub mod concurrency;
 pub mod control_flow;
 pub mod file_io;
+pub mod generics;
+pub mod lifetimes;
+pub mod regex;
 pub mod structs_traits;
 pub mod testing;

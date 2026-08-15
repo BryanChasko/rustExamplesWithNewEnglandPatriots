@@ -37,7 +37,11 @@ pub enum PlayType {
 
 impl PlayType {
     pub fn is_scoring_opportunity(&self) -> bool {
-        matches!(self, PlayType::FieldGoal { .. } | PlayType::Pass { yards, .. } if *yards > 20)
+        match self {
+            PlayType::FieldGoal { .. } => true,
+            PlayType::Pass { yards, .. } if *yards > 20 => true,
+            _ => false,
+        }
     }
 
     pub fn net_yards(&self) -> i32 {
