@@ -33,5 +33,9 @@ path = "src/loops_iterators/roster_iter.rs"
 name = "enums"
 path = "src/enums/play_type.rs"
 
+[[example]]
+name = "control_flow"
+path = "src/control_flow/game_state.rs"
+
 [dev-dependencies]
 assert_matches = "1"
