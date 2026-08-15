@@ -37,5 +37,9 @@ path = "src/enums/play_type.rs"
 name = "control_flow"
 path = "src/control_flow/game_state.rs"
 
+[[example]]
+name = "closures"
+path = "examples/closures.rs"
+
 [dev-dependencies]
 assert_matches = "1"

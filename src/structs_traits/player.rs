@@ -97,6 +97,7 @@ impl Stats for Player {
     }
 }
 
+#[allow(dead_code)]
 fn main() {
     let roster: Vec<Player> = vec![
         Player {
