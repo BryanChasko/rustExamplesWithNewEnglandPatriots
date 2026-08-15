@@ -6,4 +6,5 @@
 
 pub mod closures;
 pub mod control_flow;
+pub mod file_io;
 pub mod structs_traits;

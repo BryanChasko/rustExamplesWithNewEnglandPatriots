@@ -38,6 +38,10 @@ name = "control_flow"
 path = "src/control_flow/game_state.rs"
 
 [[example]]
+name = "file_io"
+path = "examples/file_io.rs"
+
+[[example]]
 name = "closures"
 path = "examples/closures.rs"
 
